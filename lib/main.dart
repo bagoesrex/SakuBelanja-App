@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sakubelanja_app/widgets/grocery_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: const Color.fromARGB(255, 40, 50, 42),
       ),
-      home: Placeholder(),
+      home: const GroceryList(),
     );
   }
 }
