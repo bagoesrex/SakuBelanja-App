@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sakubelanja_app/data/dummy_items.dart';
 import 'package:sakubelanja_app/models/grocery_item.dart';
 import 'package:sakubelanja_app/widgets/new_item.dart';
 
