@@ -17,6 +17,7 @@ class GroceryList extends StatefulWidget {
 class _GroceryListState extends State<GroceryList> {
   List<GroceryItem> _groceryItems = [];
   var _isLoading = true;
+  String? _error;
 
   @override
   void initState() {
@@ -30,6 +31,12 @@ class _GroceryListState extends State<GroceryList> {
       'sakubelanja.json',
     );
     final response = await http.get(url);
+    print(response.statusCode);
+    if (response.statusCode >= 400) {
+      setState(() {
+        _error = 'Gagal memuat data. Silahkan coba lagi';
+      });
+    }
     print(response.body);
     final Map<String, dynamic> listData = json.decode(response.body);
     final List<GroceryItem> loadedItems = [];
@@ -104,6 +111,10 @@ class _GroceryListState extends State<GroceryList> {
               ),
             ),
       );
+    }
+
+    if (_error != null) {
+      content = Center(child: Text(_error!));
     }
 
     return Scaffold(
