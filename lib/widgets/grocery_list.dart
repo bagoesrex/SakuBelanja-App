@@ -77,10 +77,17 @@ class _GroceryListState extends State<GroceryList> {
     });
   }
 
-  void _removeItem(GroceryItem item) {
+  void _removeItem(GroceryItem item) async {
     setState(() {
       _groceryItems.remove(item);
     });
+
+    final url = Uri.https(
+      'sakubelanja-app-default-rtdb.firebaseio.com',
+      'sakubelanja/${item.id}.json',
+    );
+
+    await http.delete(url);
   }
 
   @override
