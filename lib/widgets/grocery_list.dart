@@ -78,6 +78,7 @@ class _GroceryListState extends State<GroceryList> {
   }
 
   void _removeItem(GroceryItem item) async {
+    final index = _groceryItems.indexOf(item);
     setState(() {
       _groceryItems.remove(item);
     });
@@ -87,7 +88,13 @@ class _GroceryListState extends State<GroceryList> {
       'sakubelanja/${item.id}.json',
     );
 
-    await http.delete(url);
+    final response = await http.delete(url);
+
+    if (response.statusCode >= 400) {
+      setState(() {
+        _groceryItems.insert(index, item);
+      });
+    }
   }
 
   @override
